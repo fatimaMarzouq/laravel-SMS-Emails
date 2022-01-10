@@ -16,7 +16,7 @@ class CustomerController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|max:255',
-            'phone' => 'phone:JO',
+            'phone' => 'phone:AUTO,JO',
             
         ]);
         // print_r($request);
@@ -43,7 +43,7 @@ class CustomerController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|max:255',
-            'phone' => 'phone:JO',
+            'phone' => 'phone:AUTO,JO',
             
         ]);
         $Customer = Customer::findOrFail($request->id);

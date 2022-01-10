@@ -22,7 +22,7 @@ use App\Http\Controllers\TwilioSMSController;
 Route::get('/', function () {
     $customers=Customer::all();
     return view('pages.customersList',compact('customers'));
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth'])->name('customers-list');
 
 // Route::get('/send-email', [EmailController::class, 'sendEmail']);
 // Route::get('/sendSMS', [TwilioSMSController::class, 'index']);

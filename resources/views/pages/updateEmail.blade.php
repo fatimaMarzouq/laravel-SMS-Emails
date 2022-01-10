@@ -12,12 +12,18 @@
           <div class="mb-3">
             <label for="subject" class="form-label">Subject</label>
             <input type="text" name="subject" class="form-control" id="subject" placeholder="Enter subject" value="{{$email->subject}}">
+            @error('subject')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
           </div>
           <div class="mb-3">
             <label for="message" class="form-label">Message</label>
             <textarea name="message" class="form-control" id="message" placeholder="Enter your message">{{$email->Message}}</textarea>
+            @error('message')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
           </div>
-         
+
           <!-- <div class="mb-3">
             <label class="form-label" for="formFile">File upload</label>
             <input class="form-control" name="formFile" type="file" id="formFile">
