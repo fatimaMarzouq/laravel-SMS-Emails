@@ -7,6 +7,11 @@ use Illuminate\Console\Command;
 use App\Mail\HelloEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Models\emailCustomer;
+use Exception;
+use Twilio\Rest\Client;
+use App\Models\PredefinedEmails;
+use Illuminate\Support\Str;
 class SendEmails extends Command
 {
     /**
@@ -57,7 +62,7 @@ class SendEmails extends Command
         foreach($customers as $customer){
             if($customer->send_sms<=$d && !$customer->sms_sent && !$customer->link_clicked){
                 $receiverNumber = $customer->phone;
-        $message = "This is testing message";
+        $message = PredefinedEmails::findOrFail(4);
   
         try {
   
@@ -66,28 +71,34 @@ class SendEmails extends Command
             $twilio_number = getenv("TWILIO_FROM");
   
             $client = new Client($account_sid, $auth_token);
+            $uniqueID=emailCustomer::create([
+                "email_id" => 4,
+                "customer_id" =>$customer->id,
+            ]);
+            $link=route('link-clicked',$uniqueID->id);
+            $appendedMsg=Str::replace("{link}", $link ,$message->Message);//search on {link} and replace it with the dynamic link
             $client->messages->create($receiverNumber, [
                 'from' => $twilio_number, 
-                'body' => $message]);
+                'body' => $appendedMsg]);
   
             
             Customer::where('id',$customer->id)->update(["sms_sent" => 1]);
-            // dd('SMS Sent Successfully.');
-  
+            
+            dd('SMS Sent Successfully.'.$uniqueID);
         } catch (Exception $e) {
             dd("Error: ". $e->getMessage());
         }
             }
             if($customer->send_email1<=$d && !$customer->email1_sent && !$customer->link_clicked){
-                Mail::to($customer->email)->send(new HelloEmail(1));
+                Mail::to($customer->email)->send(new HelloEmail(1,$customer->id));
                 Customer::where('id',$customer->id)->update(["email1_sent" => 1]);
             }
             if($customer->send_email2<=$d && !$customer->email2_sent && !$customer->link_clicked){
-                Mail::to($customer->email)->send(new HelloEmail(2));
+                Mail::to($customer->email)->send(new HelloEmail(2,$customer->id));
                 Customer::where('id',$customer->id)->update(["email2_sent" => 1]);
             }
             if($customer->send_email3<=$d && !$customer->email3_sent && !$customer->link_clicked){
-                Mail::to($customer->email)->send(new HelloEmail(3));
+                Mail::to($customer->email)->send(new HelloEmail(3,$customer->id));
                 Customer::where('id',$customer->id)->update(["email3_sent" => 1]);
             }
             

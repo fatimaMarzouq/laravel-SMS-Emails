@@ -14,7 +14,7 @@ class CreateEmailCustomerTable extends Migration
     public function up()
     {
         Schema::create('email_customer', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id');
             $table->unsignedBigInteger('email_id');
             $table->unsignedBigInteger('customer_id');
             $table->foreign('email_id')->references('id')->on('predefined_emails');
