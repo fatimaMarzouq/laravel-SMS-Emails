@@ -16,15 +16,21 @@ class CustomerController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|max:255',
-            'phone' => 'required|integer|digits_between:0,10',
+            'phone' => 'phone:JO',
             
         ]);
+        // print_r($request);
+        $d =date('Y-m-d H:i:s');
         Customer::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
             'position' => $request->position,
             'company' => $request->company,
+            'send_sms'=>date('Y-m-d H:i:s', strtotime( $d . " +1 hours")),
+            'send_email1'=>date('Y-m-d H:i:s', strtotime( $d . " +1 days")),
+            'send_email2'=>date('Y-m-d H:i:s', strtotime( $d . " +2 days")),
+            'send_email3'=>date('Y-m-d H:i:s', strtotime( $d . " +3 days")),
         ]);
         return redirect(route('customers-list'));
     }
@@ -37,7 +43,7 @@ class CustomerController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|max:255',
-            'phone' => 'required|integer|digits_between:0,10',
+            'phone' => 'phone:JO',
             
         ]);
         $Customer = Customer::findOrFail($request->id);

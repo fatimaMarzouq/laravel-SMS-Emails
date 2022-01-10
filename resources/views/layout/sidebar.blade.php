@@ -11,55 +11,56 @@
   </div>
   <div class="sidebar-body">
     <ul class="nav">
-      <li class="nav-item nav-category">Main</li>
+      <!-- <li class="nav-item nav-category">Main</li>
       <li class="nav-item {{ active_class(['/']) }}">
         <a href="{{ url('/') }}" class="nav-link">
           <i class="link-icon" data-feather="box"></i>
           <span class="link-title">Dashboard</span>
         </a>
-      </li>
+      </li> -->
       <li class="nav-item nav-category">web apps</li>
-      <li class="nav-item {{ active_class(['customer/*']) }}">
-        <a class="nav-link" data-bs-toggle="collapse" href="#customer" role="button" aria-expanded="{{ is_active_route(['customer/*']) }}" aria-controls="customer">
+      <li class="nav-item {{ active_class(['/*']) }}">
+        <a class="nav-link" data-bs-toggle="collapse" href="#customer" role="button" aria-expanded="{{ is_active_route(['/*']) }}" aria-controls="customer">
           <i class="link-icon" data-feather="smile"></i>
           <span class="link-title">Customer</span>
           <i class="link-arrow" data-feather="chevron-down"></i>
         </a>
-        <div class="collapse {{ show_class(['customer/*']) }}" id="customer">
+        <div class="collapse {{ show_class(['/*']) }}" id="customer">
           <ul class="nav sub-menu">
             <li class="nav-item">
-              <a href="{{ url('/add-customer') }}" class="nav-link {{ active_class(['customer/add']) }}">Add Customer</a>
+              <a href="{{ url('/') }}" class="nav-link {{ active_class(['/']) }}">Customers List</a>
             </li>
             <li class="nav-item">
-              <a href="{{ url('/customers-list') }}" class="nav-link {{ active_class(['customer/list']) }}">Customers List</a>
+              <a href="{{ url('/add-customer') }}" class="nav-link {{ active_class(['/add']) }}">Add Customer</a>
             </li>
-            <li class="nav-item">
+            
+            <!-- <li class="nav-item">
               <a href="{{ url('/email/compose') }}" class="nav-link {{ active_class(['email/compose']) }}">Compose</a>
-            </li>
+            </li> -->
           </ul>
         </div>
       </li>
       <li class="nav-item {{ active_class(['email/*']) }}">
         <a class="nav-link" data-bs-toggle="collapse" href="#email" role="button" aria-expanded="{{ is_active_route(['email/*']) }}" aria-controls="email">
           <i class="link-icon" data-feather="mail"></i>
-          <span class="link-title">Email</span>
+          <span class="link-title">Sending</span>
           <i class="link-arrow" data-feather="chevron-down"></i>
         </a>
         <div class="collapse {{ show_class(['email/*']) }}" id="email">
           <ul class="nav sub-menu">
             <li class="nav-item">
-              <a href="{{ url('/email/inbox') }}" class="nav-link {{ active_class(['email/inbox']) }}">Inbox</a>
+              <a href="{{ url('/emails-list') }}" class="nav-link {{ active_class(['email/list']) }}">Emails & SMS List</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a href="{{ url('/email/read') }}" class="nav-link {{ active_class(['email/read']) }}">Read</a>
             </li>
             <li class="nav-item">
               <a href="{{ url('/email/compose') }}" class="nav-link {{ active_class(['email/compose']) }}">Compose</a>
-            </li>
+            </li> -->
           </ul>
         </div>
       </li>
-      <li class="nav-item {{ active_class(['apps/chat']) }}">
+      <!-- <li class="nav-item {{ active_class(['apps/chat']) }}">
         <a href="{{ url('/apps/chat') }}" class="nav-link">
           <i class="link-icon" data-feather="message-square"></i>
           <span class="link-title">Chat</span>
@@ -151,8 +152,8 @@
             </li>
           </ul>
         </div>
-      </li>
-      <li class="nav-item {{ active_class(['advanced-ui/*']) }}">
+      </li> -->
+      <!-- <li class="nav-item {{ active_class(['advanced-ui/*']) }}">
         <a class="nav-link" data-bs-toggle="collapse" href="#advanced-ui" role="button" aria-expanded="{{ is_active_route(['advanced-ui/*']) }}" aria-controls="advanced-ui">
           <i class="link-icon" data-feather="anchor"></i>
           <span class="link-title">Advanced UI</span>
@@ -331,11 +332,11 @@
           <i class="link-icon" data-feather="hash"></i>
           <span class="link-title">Documentation</span>
         </a>
-      </li>
+      </li> -->
     </ul>
   </div>
 </nav>
-<nav class="settings-sidebar">
+<!-- <nav class="settings-sidebar">
   <div class="sidebar-body">
     <a href="#" class="settings-sidebar-toggler">
       <i data-feather="settings"></i>
@@ -366,4 +367,4 @@
       </a>
     </div>
   </div>
-</nav>
+</nav> -->

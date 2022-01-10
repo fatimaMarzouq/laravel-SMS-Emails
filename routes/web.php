@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
+use App\Models\Customer;
+use App\Http\Controllers\EmailController;
+use App\Http\Controllers\TwilioSMSController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,19 +20,27 @@ use App\Http\Controllers\CustomerController;
 
 
 Route::get('/', function () {
-    return view('dashboard');
+    $customers=Customer::all();
+    return view('pages.customersList',compact('customers'));
 })->middleware(['auth'])->name('dashboard');
 
+// Route::get('/send-email', [EmailController::class, 'sendEmail']);
+// Route::get('/sendSMS', [TwilioSMSController::class, 'index']);
+
+Route::get('/emails-list', [EmailController::class, 'index'])->middleware(['auth', 'verified'])->name('emails-list');
+Route::get('/email/{id}/update', [ EmailController::class ,'updateView'])->middleware(['auth', 'verified'])->name('update-email');
+Route::post('/updateemail',[ EmailController::class ,'update'])->middleware(['auth', 'verified'])->name("updateemail");
+
 require __DIR__.'/auth.php';
-Route::get('/customers-list', [ CustomerController::class ,'index'])->name('customers-list');
-Route::get('/add-customer', function () { return view('pages.addCustomer'); })->name('add-customer');
-Route::post('/storecustomer',[ CustomerController::class ,'store'])->name("storecustomer");
+// Route::get('/customers-list', [ CustomerController::class ,'index'])->middleware(['auth', 'verified'])->name('customers-list');
+Route::get('/add-customer', function () { return view('pages.addCustomer'); })->middleware(['auth', 'verified'])->name('add-customer');
+Route::post('/storecustomer',[ CustomerController::class ,'store'])->middleware(['auth', 'verified'])->name("storecustomer");
 
-Route::get('/customer/{id}/update', [ CustomerController::class ,'updateView'])->name('update-customer');
-Route::post('/updatecustomer',[ CustomerController::class ,'update'])->name("updatecustomer");
+Route::get('/customer/{id}/update', [ CustomerController::class ,'updateView'])->middleware(['auth', 'verified'])->name('update-customer');
+Route::post('/updatecustomer',[ CustomerController::class ,'update'])->middleware(['auth', 'verified'])->name("updatecustomer");
 
-Route::get('/customer/{id}/delete', [ CustomerController::class ,'deleteView'])->name('delete-customer');
-Route::post('/deletecustomer',[ CustomerController::class ,'delete'])->name("deletecustomer");
+Route::get('/customer/{id}/delete', [ CustomerController::class ,'deleteView'])->middleware(['auth', 'verified'])->name('delete-customer');
+Route::post('/deletecustomer',[ CustomerController::class ,'delete'])->middleware(['auth', 'verified'])->name("deletecustomer");
 
 Route::group(['prefix' => 'email'], function(){
     Route::get('inbox', function () { return view('pages.email.inbox'); });
@@ -109,10 +121,10 @@ Route::group(['prefix' => 'general'], function(){
     Route::get('timeline', function () { return view('pages.general.timeline'); });
 });
 
-Route::group(['prefix' => 'auth'], function(){
-    Route::get('login', function () { return view('pages.auth.login'); });
-    Route::get('register', function () { return view('pages.auth.register'); });
-});
+// Route::group(['prefix' => 'auth'], function(){
+//     Route::get('login', function () { return view('pages.auth.login'); });
+//     Route::get('register', function () { return view('pages.auth.register'); });
+// });
 
 Route::group(['prefix' => 'error'], function(){
     Route::get('404', function () { return view('pages.error.404'); });

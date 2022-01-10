@@ -19,7 +19,7 @@
           </div>
           <div class="mb-3">
             <label for="phone" class="form-label">Phone</label>
-            <input type="number" name="phone" class="form-control" id="phone" placeholder="Enter Phone" value="{{$customer->phone}}">
+            <input type="text" name="phone" class="form-control" id="phone" placeholder="Enter Phone" value="{{$customer->phone}}">
           </div>
           <div class="mb-3">
             <label for="position" class="form-label">position</label>
