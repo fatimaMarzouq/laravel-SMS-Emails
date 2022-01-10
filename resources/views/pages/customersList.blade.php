@@ -21,6 +21,7 @@
                 <th>Position</th>
                 <th>Company</th>                
                 <th>Date Added</th>
+                <th>Status</th>
                 <th></th>
                 <th></th>
               </tr>
@@ -34,6 +35,22 @@
                 <td>{{$customer->position}}</td>
                 <td>{{$customer->company}}</td>
                 <td>{{$customer->created_at}}</td>
+                <td>@if ($customer->link_clicked)
+                  <span class="badge bg-success">Clicked</span>
+                  @elseif ($customer->email3_sent)
+                  <span class="badge bg-danger">3 Emails Sent</span>
+                  @elseif ($customer->email2_sent)
+                  <span class="badge bg-warning">2 Emails Sent</span>
+                  @elseif ($customer->email1_sent)
+                  <span class="badge bg-info">1 Email Sent</span>
+                  @elseif ($customer->sms_sent)
+                  <span class="badge bg-secondary">SMS Sent</span>
+                  @else
+                  <span class="badge bg-dark">none</span>
+                  @endif
+                  
+                
+                </td>
                 <td><a href="{{route('update-customer',$customer->id)}}" class="btn btn-primary">Update<a></td>
                 <td><a href="{{route('delete-customer',$customer->id)}}" class="btn btn-primary">Delete<a></td>
               </tr>

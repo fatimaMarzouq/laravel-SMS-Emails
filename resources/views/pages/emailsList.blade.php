@@ -20,7 +20,7 @@
               @foreach($emails as $email)
                 <tr>
                 <td>{{$email->subject}}</td>
-                <td><span class="p-1 bg-secondary text-white text-uppercase">{{$email->type}}</span></td>
+                <td><span class="bg-secondary badge text-uppercase">{{$email->type}}</span></td>
                 <td><a href="{{route('update-email',$email->id)}}" class="btn btn-primary">Update<a></td>
               </tr>
                 @endforeach

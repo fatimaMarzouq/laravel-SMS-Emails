@@ -40,7 +40,7 @@ public $customer_id;
         ]);
         $link=route('link-clicked',$uniqueID->id);
         $appendedMsg=Str::replace("{link}", $link ,$email->Message);//search on {link} and replace it with the dynamic link
-        return $this->from("support@example.com")->view('email-template')->with([
+        return $this->subject($email->subject)->from("support@example.com")->view('email-template')->with([
             'Message' => $appendedMsg,
         ]);
     }
