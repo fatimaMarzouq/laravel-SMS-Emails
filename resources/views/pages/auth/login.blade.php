@@ -21,18 +21,24 @@
                 <div class="mb-3">
                   <label for="userEmail" class="form-label">Email address</label>
                   <input type="email" class="form-control" id="userEmail" placeholder="Email" name="email" :value="old('email')" required autofocus>
+                  @error('email')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
                 </div>
                 <div class="mb-3">
                   <label for="userPassword" class="form-label">Password</label>
                   <input type="password" class="form-control" id="userPassword" name="password"
                                 required autocomplete="current-password"  placeholder="Password">
+                                @error('password')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
                 </div>
-                <div class="form-check mb-3">
+                <!-- <div class="form-check mb-3">
                   <input type="checkbox" class="form-check-input" id="authCheck">
                   <label class="form-check-label" for="authCheck">
                     Remember me
                   </label>
-                </div>
+                </div> -->
                 <div>
                   
                   <button type="submit" class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">
