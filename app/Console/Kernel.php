@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
         SendEmails::class,
         ];
 
-        
+
     /**
      * Define the application's command schedule.
      *
@@ -30,7 +30,6 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
         $schedule->command('emails:send')->everyMinute();
     }
-
     /**
      * Register the commands for the application.
      *
