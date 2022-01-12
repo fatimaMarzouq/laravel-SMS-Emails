@@ -51,10 +51,10 @@
             <li class="nav-item">
               <a href="{{ url('/emails-list') }}" class="nav-link {{ active_class(['email/list']) }}">Emails & SMS List</a>
             </li>
-            <!-- <li class="nav-item">
-              <a href="{{ url('/email/read') }}" class="nav-link {{ active_class(['email/read']) }}">Read</a>
-            </li>
             <li class="nav-item">
+              <a href="{{ url('/redirect-to') }}" class="nav-link {{ active_class(['email/url']) }}">Redirect To URL</a>
+            </li>
+            <!-- <li class="nav-item">
               <a href="{{ url('/email/compose') }}" class="nav-link {{ active_class(['email/compose']) }}">Compose</a>
             </li> -->
           </ul>

@@ -21,7 +21,7 @@
                 <th>Position</th>
                 <th>Company</th>                
                 <th>Date Added</th>
-                <th>Status</th>
+                <th>Invite</th>
                 <th></th>
                 <th></th>
               </tr>
@@ -35,7 +35,7 @@
                 <td>{{$customer->position}}</td>
                 <td>{{$customer->company}}</td>
                 <td>{{$customer->created_at}}</td>
-                <td>@if ($customer->link_clicked)
+                <!-- <td>@if ($customer->link_clicked)
                   <span class="badge bg-success">Clicked</span>
                   @elseif ($customer->email3_sent)
                   <span class="badge bg-danger">3 Emails Sent</span>
@@ -48,9 +48,12 @@
                   @else
                   <span class="badge bg-dark">none</span>
                   @endif
-                  
-                
-                </td>
+                </td> -->
+                @if ($customer->sms_sent)
+                <td>Invited</td>
+                @else
+                <td><a href="{{route('invite-customer',$customer->id)}}" class="text-primary">Invite<a></td>
+                @endif
                 <td><a href="{{route('update-customer',$customer->id)}}" class="btn btn-primary">Update<a></td>
                 <td><a href="{{route('delete-customer',$customer->id)}}" class="btn btn-primary">Delete<a></td>
               </tr>

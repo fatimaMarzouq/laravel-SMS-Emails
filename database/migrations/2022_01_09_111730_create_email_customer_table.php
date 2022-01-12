@@ -20,6 +20,7 @@ class CreateEmailCustomerTable extends Migration
             $table->foreign('email_id')->references('id')->on('predefined_emails');
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->timestamps();
+            $table->primary('id'); 
         });
     }
 

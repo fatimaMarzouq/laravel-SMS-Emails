@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\UrlController;
 use App\Models\Customer;
+use App\Models\Url;
 use App\Models\emailCustomer;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\PredefinedEmailsController;
@@ -31,10 +33,18 @@ $customer=Customer::findOrFail($uniqueID->customer_id);
 $customer->link_clicked=1;
 $customer->save();
 // print_r($customer); 
-return redirect("https://www.google.com"); 
+$url=Url::where('status',1)->pluck('url');
+if(!empty($url[0])) {
+return redirect($url[0]);} 
+return redirect("error/404");
 })->name('link-clicked');
 
 Route::get('/send-email', [EmailController::class, 'sendEmail']);
+Route::post('/getdeliveries', [EmailController::class, 'getdeliveries']);
+
+// Route::get('/save-url/{id}', [UrlController::class, 'save'])->name('save-url');
+Route::post('/saveurl', [UrlController::class, 'save'])->name('saveurl');
+Route::get('/redirect-to', [UrlController::class, 'index'])->name('url-list');
 // Route::get('/sendSMS', [TwilioSMSController::class, 'index']);
 
 Route::get('/emails-list', [PredefinedEmailsController::class, 'index'])->middleware(['auth', 'verified'])->name('emails-list');
@@ -42,6 +52,8 @@ Route::get('/email/{id}/update', [ PredefinedEmailsController::class ,'updateVie
 Route::post('/updateemail',[ PredefinedEmailsController::class ,'update'])->middleware(['auth', 'verified'])->name("updateemail");
 
 require __DIR__.'/auth.php';
+Route::get('/customer/{id}/invite', [ CustomerController::class ,'invite'])->middleware(['auth', 'verified'])->name('invite-customer');
+
 // Route::get('/customers-list', [ CustomerController::class ,'index'])->middleware(['auth', 'verified'])->name('customers-list');
 Route::get('/add-customer', function () { return view('pages.addCustomer'); })->middleware(['auth', 'verified'])->name('add-customer');
 Route::post('/storecustomer',[ CustomerController::class ,'store'])->middleware(['auth', 'verified'])->name("storecustomer");
@@ -116,11 +128,11 @@ Route::post('/deletecustomer',[ CustomerController::class ,'delete'])->middlewar
 //     Route::get('data-table', function () { return view('pages.tables.data-table'); });
 // });
 
-// Route::group(['prefix' => 'icons'], function(){
-//     Route::get('feather-icons', function () { return view('pages.icons.feather-icons'); });
-//     Route::get('flag-icons', function () { return view('pages.icons.flag-icons'); });
-//     Route::get('mdi-icons', function () { return view('pages.icons.mdi-icons'); });
-// });
+Route::group(['prefix' => 'icons'], function(){
+    Route::get('feather-icons', function () { return view('pages.icons.feather-icons'); });
+    Route::get('flag-icons', function () { return view('pages.icons.flag-icons'); });
+    Route::get('mdi-icons', function () { return view('pages.icons.mdi-icons'); });
+});
 
 // Route::group(['prefix' => 'general'], function(){
 //     Route::get('blank-page', function () { return view('pages.general.blank-page'); });

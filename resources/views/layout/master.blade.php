@@ -42,6 +42,7 @@ License: For each use you must have a valid license purchased only from above li
   <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
   <!-- end common css -->
 
+  @stack('script')
   @stack('style')
 </head>
 <body data-base-url="{{url('/')}}">

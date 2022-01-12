@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use Exception;
+use Twilio\Rest\Client;
+use App\Models\PredefinedEmails;
+use App\Models\emailCustomer;
+use Illuminate\Support\Str;
 class CustomerController extends Controller
 {
     public function index()
@@ -20,17 +25,14 @@ class CustomerController extends Controller
             
         ]);
         // print_r($request);
-        $d =date('Y-m-d H:i:s');
+        
         Customer::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
             'position' => $request->position,
             'company' => $request->company,
-            'send_sms'=>date('Y-m-d H:i:s', strtotime( $d . " +1 hours")),
-            'send_email1'=>date('Y-m-d H:i:s', strtotime( $d . " +1 days")),
-            'send_email2'=>date('Y-m-d H:i:s', strtotime( $d . " +2 days")),
-            'send_email3'=>date('Y-m-d H:i:s', strtotime( $d . " +3 days")),
+            
         ]);
         return redirect(route('customers-list'));
     }
@@ -68,5 +70,42 @@ class CustomerController extends Controller
         $Customer->delete();
         
         return redirect(route('customers-list'));
+    }
+
+    public function invite($id){
+        $customer=Customer::findOrFail($id);
+        // return view('pages.deleteCustomer',compact('customer'));
+        if(!$customer->sms_sent && !$customer->link_clicked){
+            $receiverNumber = $customer->phone;
+    $message = PredefinedEmails::findOrFail(4);
+
+    try {
+
+        $account_sid = getenv("TWILIO_SID");
+        $auth_token = getenv("TWILIO_TOKEN");
+        $twilio_number = getenv("TWILIO_FROM");
+
+        $client = new Client($account_sid, $auth_token);
+        $uniqueID=emailCustomer::create([
+            "email_id" => 4,
+            "customer_id" =>$customer->id,
+        ]);
+        $link=route('link-clicked',$uniqueID->id);
+        $appendedMsg=Str::replace("{link}", $link ,$message->Message);//search on {link} and replace it with the dynamic link
+        $client->messages->create($receiverNumber, [
+            'from' => $twilio_number, 
+            'body' => $appendedMsg]);
+
+        $d =date('Y-m-d H:i:s');
+        Customer::where('id',$customer->id)->update(['sms_sent' => 1,
+            'send_email1'=>date('Y-m-d H:i:s', strtotime( $d . " +1 days")),
+            'send_email2'=>date('Y-m-d H:i:s', strtotime( $d . " +2 days")),
+            'send_email3'=>date('Y-m-d H:i:s', strtotime( $d . " +3 days")),]);
+        // dd('SMS Sent Successfully.'.$uniqueID);
+        return redirect(route('customers-list'));
+    } catch (Exception $e) {
+        dd("Error: ". $e->getMessage());
+    }
+        }
     }
 }

@@ -13,6 +13,8 @@
               <tr>
                 <th>Subject</th>
                 <th>Type</th>
+                <th>Sent</th>
+                <th>Clicked</th>
                 <th></th>
               </tr>
               </thead>
@@ -21,7 +23,23 @@
                 <tr>
                 <td>{{$email->subject}}</td>
                 <td><span class="bg-secondary badge text-uppercase">{{$email->type}}</span></td>
+                <td>{{$email->count}}</td>
+                <td>
+                  @if($email->id==1)
+                  {{$email->clickedIn1}}%
+                  @endif
+                  @if($email->id==2)
+                  {{$email->clickedIn2}}%
+                  @endif
+                  @if($email->id==3)
+                  {{$email->clickedIn3}}%
+                  @endif
+                  @if($email->id==4)
+                  {{$email->clickedInSms}}%
+                  @endif
+                </td>
                 <td><a href="{{route('update-email',$email->id)}}" class="btn btn-primary">Update<a></td>
+                
               </tr>
                 @endforeach
               </tbody>
