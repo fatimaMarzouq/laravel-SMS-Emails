@@ -40,7 +40,7 @@ return redirect("error/404");
 })->name('link-clicked');
 
 Route::get('/send-email', [EmailController::class, 'sendEmail']);
-Route::post('/getdeliveries', [EmailController::class, 'getdeliveries']);
+// Route::post('/getdeliveries', [EmailController::class, 'getdeliveries']);
 
 // Route::get('/save-url/{id}', [UrlController::class, 'save'])->name('save-url');
 Route::post('/saveurl', [UrlController::class, 'save'])->name('saveurl');
