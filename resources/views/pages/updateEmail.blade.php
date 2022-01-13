@@ -5,7 +5,7 @@
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        <h6 class="card-title">Update Email</h6>
+        <h6 class="card-title">Update {{$email->subject}}</h6>
         <form method="post" action="/updateemail">
         @csrf <!-- {{ csrf_field() }} -->
         <input type="hidden" name='id' value="{{$email->id}}">
@@ -28,7 +28,7 @@
             <label class="form-label" for="formFile">File upload</label>
             <input class="form-control" name="formFile" type="file" id="formFile">
           </div> -->
-          <button class="btn btn-primary" type="submit">Update Email</button>
+          <button class="btn btn-primary" type="submit">Update </button>
         </form>
       </div>
     </div>
