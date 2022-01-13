@@ -50,9 +50,7 @@
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif
-                </div>
-                <a href="{{ route('register') }}" class="d-block mt-3 text-muted">Not a user? Sign up</a>
-                
+                </div>                
               </form>
             </div>
           </div>
