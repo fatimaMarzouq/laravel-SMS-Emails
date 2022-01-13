@@ -15,7 +15,6 @@
   <div class="sidebar-body">
     <ul class="nav">
      
-      <li class="nav-item nav-category">web apps</li>
       <li class="nav-item {{ active_class(['/*']) }}">
         <a class="nav-link" data-bs-toggle="collapse" href="#customer" role="button" aria-expanded="{{ is_active_route(['/*']) }}" aria-controls="customer">
           <i class="link-icon" data-feather="smile"></i>
@@ -53,7 +52,14 @@
           </ul>
         </div>
       </li>
-      
+      <li class="nav-item {{ active_class(['/doc']) }}">
+          <a href="{{ url('/doc') }}" class="nav-link {{ active_class(['doc/']) }}">
+            <i class="link-icon" data-feather="archive"></i>
+          <span class="link-title">Documentation</span>
+</a>
+        
+        
+      </li>
     </ul>
   </div>
 </nav>

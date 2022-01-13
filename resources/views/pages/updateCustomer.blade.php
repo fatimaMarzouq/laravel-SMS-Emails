@@ -17,7 +17,7 @@
             @enderror
           </div>
           <div class="mb-3">
-            <label for="email" class="form-label">Email Input</label>
+            <label for="email" class="form-label">Email</label>
             <input type="email" name="email" class="form-control" id="email" placeholder="Enter Email" value="{{$customer->email}}">
             @error('email')
             <div class="text-danger">{{ $message }}</div>

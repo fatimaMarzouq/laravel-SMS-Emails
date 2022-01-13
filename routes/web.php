@@ -22,7 +22,10 @@ use App\Http\Controllers\TwilioSMSController;
 */
 
 
-
+Route::get('/doc', function () {
+    $customers=Customer::all();
+    return view('doc');
+})->middleware(['auth'])->name('doc');
 Route::get('/', function () {
     $customers=Customer::all();
     return view('pages.customersList',compact('customers'));
