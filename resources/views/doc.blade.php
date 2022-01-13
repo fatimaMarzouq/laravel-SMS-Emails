@@ -57,6 +57,25 @@
         </div>
         <div class="row align-items-start m-2">
 
+         <h6 class="card-title">Invite Customer</h6>
+         <p class="text-muted tx-15 mb-3 mb-md-0 ">You can invite customers from the <span class="text-primary">Invite</span> customer's button in <a href="{{ route('customers-list') }}">Customers List</a> page.</p>
+         <p class="text-muted tx-15 mb-3 mb-md-0 ">1. when you click the <span class="text-primary">Invite</span> button a predefined SMS will be send to the customer you invited.</p>
+         <p class="text-muted tx-15 mb-3 mb-md-0 ">2. After 1 day if the customer didn't click on the link, the first email will be send to the customer.</p>
+         <p class="text-muted tx-15 mb-3 mb-md-0 ">3. After 2 days if the customer didn't click on the last link, the second email will be send to the customer.</p>
+         <p class="text-muted tx-15 mb-3 mb-md-0 ">4. Finally after 3 days if the customer didn't click on the previous link, the last email will be send to the customer.</p>
+         <img class="text-muted tx-15 mt-3 mb-md-0 " src="{{ asset('/assets/images/doc/Capture2.PNG') }}" style="cursor: zoom-in;" data-toggle="modal" data-target="#Capture2">
+          <!-- Modal -->
+          <div class="modal fade" id="Capture2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 100% !important;">
+              <div class="modal-content">
+              <img class="text-muted tx-15 mt-3 mb-md-0 " src="{{ asset('/assets/images/doc/Capture2.PNG') }}" >
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="row align-items-start m-2">
+
          <h6 class="card-title mt-2">Update Customer</h6>
          <p class="text-muted tx-15 mb-3 mb-md-0 ">You can update an existing customer from the <span class="text-primary">Update</span> customer's button in <a href="{{ route('customers-list') }}">Customers List</a> page. Name, Email and Phone are the required feilds and the others are optional. the phone must be with the international code(+).</p>
          <img class="text-muted tx-15 mt-3 mb-md-0 " src="{{ asset('/assets/images/doc/updateCustomer.PNG') }}" style="cursor: zoom-in;" data-toggle="modal" data-target="#updateCustomer">
