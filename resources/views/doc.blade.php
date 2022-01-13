@@ -115,7 +115,7 @@
         </div>
         <div class="row align-items-start mb-2">
           <div class="col-md-7">
-            <p class="text-muted tx-15 mb-3 mb-md-0">Customers are the people who you want to send the message and the emails to encourage them to leave a review.</p>
+            <p class="text-muted tx-15 mb-3 mb-md-0">Sending is the section that manage the SMS, the Emails, and the urls in the system.</p>
           </div>
         </div>
         <div class="row align-items-start m-2">
