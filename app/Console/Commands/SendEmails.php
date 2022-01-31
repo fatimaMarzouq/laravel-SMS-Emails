@@ -64,6 +64,7 @@ class SendEmails extends Command
             if($customer->send_email1!=null && $customer->send_email1<=$d && !$customer->email1_sent && !$customer->link_clicked){
                 Mail::to($customer->email)->send(new HelloEmail(1,$customer->id));
                 Customer::where('id',$customer->id)->update(["email1_sent" => 1]);
+                
             }
             if($customer->send_email2!=null &&  $customer->send_email2<=$d && !$customer->email2_sent && !$customer->link_clicked){
                 Mail::to($customer->email)->send(new HelloEmail(2,$customer->id));
