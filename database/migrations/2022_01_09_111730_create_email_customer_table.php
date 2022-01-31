@@ -17,8 +17,8 @@ class CreateEmailCustomerTable extends Migration
             $table->uuid('id');
             $table->unsignedBigInteger('email_id');
             $table->unsignedBigInteger('customer_id');
-            $table->foreign('email_id')->references('id')->on('predefined_emails');
-            $table->foreign('customer_id')->references('id')->on('customers');
+            $table->foreign('email_id')->references('id')->on('predefined_emails')->onDelete('cascade');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->timestamps();
             $table->primary('id'); 
         });
