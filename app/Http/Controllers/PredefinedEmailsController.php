@@ -16,37 +16,45 @@ class PredefinedEmailsController extends Controller
         foreach($emails as $email){
             $sentEmails=emailCustomer::where('email_id',$email->id)->get();
             $count=$sentEmails->count();
-            $clickedInSms=0;
-            $clickedIn1=0;
-            $clickedIn2=0;
-            $clickedIn3=0;
+            $clickedInSms1=0;
+            $clickedInEmail1=0;
+            $clickedInSms2=0;
+            $clickedInEmail2=0;
             // $sentEmails=emailCustomer::where('email_id',2)->get();            
             foreach($sentEmails as $sentEmail){
-                
-                $customer=Customer::findOrFail($sentEmail->customer_id);
-                
-                if($customer->email3_sent && $customer->link_clicked ){
-                    $clickedIn3++;
-                }else 
-                if($customer->email2_sent && $customer->link_clicked && !$customer->email3_sent){
-                    $clickedIn2++;
-                } else
-                if($customer->email1_sent && $customer->link_clicked && !$customer->email2_sent && !$customer->email3_sent){
-                    $clickedIn1++;
-                }else
-                if( $customer->sms_sent && $customer->link_clicked && !$customer->email1_sent && !$customer->email2_sent && !$customer->email3_sent){
-                    $clickedInSms++;
+                if($email->id==1 && $sentEmail->link_clicked){
+                    $clickedInEmail1++;
+                }else if($email->id==2 && $sentEmail->link_clicked){
+                    $clickedInSms1++;
+                }else if($email->id==3 && $sentEmail->link_clicked){
+                    $clickedInEmail2++;
+                }else if($email->id==4 && $sentEmail->link_clicked){
+                    $clickedInSms2++;
                 }
+                // $customer=Customer::findOrFail($sentEmail->customer_id);
+                
+                // if($customer->email2_sent && $customer->link_clicked ){
+                //     $clickedInEmail2++;
+                // }else 
+                // if($customer->sms2_sent && $customer->link_clicked && !$customer->email2_sent){
+                //     $clickedInSms2++;
+                // } else
+                // if($customer->email1_sent && $customer->link_clicked && !$customer->email2_sent && !$customer->email3_sent){
+                //     $clickedIn1++;
+                // }else
+                // if( $customer->sms_sent && $customer->link_clicked && !$customer->email1_sent && !$customer->email2_sent && !$customer->email3_sent){
+                //     $clickedInSms++;
+                // }
                
             }
             // echo '$clickedIn1 '.$clickedIn1."<br>";
             // echo '$clickedIn2 '.$clickedIn2."<br>";
             // echo '$clickedIn3 '.$clickedIn3."<br>";
             // echo '$clickedInSms '.$clickedInSms."<br>";
-            $email['clickedIn1']=$clickedIn1?($clickedIn1/$count)*100 : $clickedIn1;
-            $email['clickedIn2']=$clickedIn2?($clickedIn2/$count)*100: $clickedIn2;
-            $email['clickedIn3']=$clickedIn3?($clickedIn3/$count)*100: $clickedIn3;
-            $email['clickedInSms']=$clickedInSms?($clickedInSms/$count)*100 : $clickedInSms;
+            $email['clickedInEmail1']=$clickedInEmail1?($clickedInEmail1/$count)*100 : $clickedInEmail1;
+            $email['clickedInSms1']=$clickedInSms1?($clickedInSms1/$count)*100: $clickedInSms1;
+            $email['clickedInEmail2']=$clickedInEmail2?($clickedInEmail2/$count)*100: $clickedInEmail2;
+            $email['clickedInSms2']=$clickedInSms2?($clickedInSms2/$count)*100 : $clickedInSms2;
             $email['count']=$count;
         }
         

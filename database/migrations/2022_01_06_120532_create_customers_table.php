@@ -20,13 +20,12 @@ class CreateCustomersTable extends Migration
             $table->string('phone');
             $table->string('position')->nullable();
             $table->string('company')->nullable();
-            $table->boolean('sms_sent')->default(0);
-            $table->datetime('send_email1')->nullable();
+            $table->boolean('sms1_sent')->default(0);
             $table->boolean('email1_sent')->default(0);
+            $table->datetime('send_sms2')->nullable();
+            $table->boolean('sms2_sent')->default(0);
             $table->datetime('send_email2')->nullable();
             $table->boolean('email2_sent')->default(0);
-            $table->datetime('send_email3')->nullable();
-            $table->boolean('email3_sent')->default(0);
             $table->boolean('link_clicked')->default(0);
             $table->timestamps();
         });

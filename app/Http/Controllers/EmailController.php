@@ -81,18 +81,18 @@ class EmailController extends Controller
         //     dd("Error: ". $e->getMessage());
         // }
         //     }
-            if($customer->send_email1<=$d && !$customer->email1_sent && !$customer->link_clicked){
-                Mail::to($customer->email)->send(new HelloEmail(1,$customer->id));
-                Customer::where('id',$customer->id)->update(["email1_sent" => 1]);
-            }
-            if($customer->send_email2<=$d && !$customer->email2_sent && !$customer->link_clicked){
-                Mail::to($customer->email)->send(new HelloEmail(2,$customer->id));
-                Customer::where('id',$customer->id)->update(["email2_sent" => 1]);
-            }
-            if($customer->send_email3<=$d && !$customer->email3_sent && !$customer->link_clicked){
-                Mail::to($customer->email)->send(new HelloEmail(3,$customer->id));
-                Customer::where('id',$customer->id)->update(["email3_sent" => 1]);
-            }
+            // if($customer->send_email1<=$d && !$customer->email1_sent && !$customer->link_clicked){
+            //     Mail::to($customer->email)->send(new HelloEmail(1,$customer->id));
+            //     Customer::where('id',$customer->id)->update(["email1_sent" => 1]);
+            // }
+            // if($customer->send_email2<=$d && !$customer->email2_sent && !$customer->link_clicked){
+            //     Mail::to($customer->email)->send(new HelloEmail(2,$customer->id));
+            //     Customer::where('id',$customer->id)->update(["email2_sent" => 1]);
+            // }
+            // if($customer->send_email3<=$d && !$customer->email3_sent && !$customer->link_clicked){
+            //     Mail::to($customer->email)->send(new HelloEmail(3,$customer->id));
+            //     Customer::where('id',$customer->id)->update(["email3_sent" => 1]);
+            // }
             
         }
         

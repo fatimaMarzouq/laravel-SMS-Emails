@@ -26,16 +26,16 @@
                 <td>{{$email->count}}</td>
                 <td>
                   @if($email->id==1)
-                  {{$email->clickedIn1}}%
+                  {{$email->clickedInEmail1}}%
                   @endif
                   @if($email->id==2)
-                  {{$email->clickedIn2}}%
+                  {{$email->clickedInSms1}}%
                   @endif
                   @if($email->id==3)
-                  {{$email->clickedIn3}}%
+                  {{$email->clickedInEmail2}}%
                   @endif
                   @if($email->id==4)
-                  {{$email->clickedInSms}}%
+                  {{$email->clickedInSms2}}%
                   @endif
                 </td>
                 <td><a href="{{route('update-email',$email->id)}}" class="btn btn-primary">Update<a></td>

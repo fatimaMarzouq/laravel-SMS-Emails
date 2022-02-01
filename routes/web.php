@@ -32,6 +32,8 @@ Route::get('/', function () {
 })->middleware(['auth'])->name('customers-list');
 Route::get('/link/{id}', function ($id) {
 $uniqueID=emailCustomer::findOrFail($id);
+$uniqueID->link_clicked=1;
+$uniqueID->save();
 $customer=Customer::findOrFail($uniqueID->customer_id);
 $customer->link_clicked=1;
 $customer->save();

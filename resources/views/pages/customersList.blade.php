@@ -49,7 +49,7 @@
                   <span class="badge bg-dark">none</span>
                   @endif
                 </td> -->
-                @if ($customer->sms_sent)
+                @if ($customer->sms1_sent)
                 <td>Invited</td>
                 @else
                 <td><a href="{{route('invite-customer',$customer->id)}}" class="text-primary">Invite<a></td>

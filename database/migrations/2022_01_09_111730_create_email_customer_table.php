@@ -17,6 +17,7 @@ class CreateEmailCustomerTable extends Migration
             $table->uuid('id');
             $table->unsignedBigInteger('email_id');
             $table->unsignedBigInteger('customer_id');
+            $table->boolean('link_clicked')->default(0);
             $table->foreign('email_id')->references('id')->on('predefined_emails')->onDelete('cascade');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->timestamps();

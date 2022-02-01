@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Mail\HelloEmail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use Exception;
@@ -75,9 +78,9 @@ class CustomerController extends Controller
     public function invite($id){
         $customer=Customer::findOrFail($id);
         // return view('pages.deleteCustomer',compact('customer'));
-        if(!$customer->sms_sent && !$customer->link_clicked){
+        if(!$customer->sms1_sent && !$customer->link_clicked){
             $receiverNumber = $customer->phone;
-    $message = PredefinedEmails::findOrFail(4);
+    $message = PredefinedEmails::findOrFail(2);
 
     try {
 
@@ -87,7 +90,7 @@ class CustomerController extends Controller
 
         $client = new Client($account_sid, $auth_token);
         $uniqueID=emailCustomer::create([
-            "email_id" => 4,
+            "email_id" => 2,
             "customer_id" =>$customer->id,
         ]);
         $link=route('link-clicked',$uniqueID->id);
@@ -95,12 +98,11 @@ class CustomerController extends Controller
         $client->messages->create($receiverNumber, [
             'from' => $twilio_number, 
             'body' => $appendedMsg]);
-
+        Mail::to($customer->email)->send(new HelloEmail(1,$customer->id));
         $d =date('Y-m-d H:i:s');
-        Customer::where('id',$customer->id)->update(['sms_sent' => 1,
-            'send_email1'=>date('Y-m-d H:i:s', strtotime( $d . " +1 days")),
-            'send_email2'=>date('Y-m-d H:i:s', strtotime( $d . " +2 days")),
-            'send_email3'=>date('Y-m-d H:i:s', strtotime( $d . " +3 days")),]);
+        Customer::where('id',$customer->id)->update(['sms1_sent' => 1,'email1_sent'=>1,
+            'send_sms2'=>date('Y-m-d H:i:s', strtotime( $d . " +3 days")),
+            'send_email2'=>date('Y-m-d H:i:s', strtotime( $d . " +3 days")),]);
         // dd('SMS Sent Successfully.'.$uniqueID);
         return redirect(route('customers-list'));
     } catch (Exception $e) {
