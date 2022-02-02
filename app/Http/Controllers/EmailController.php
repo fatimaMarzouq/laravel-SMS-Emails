@@ -93,6 +93,14 @@ class EmailController extends Controller
             //     Mail::to($customer->email)->send(new HelloEmail(3,$customer->id));
             //     Customer::where('id',$customer->id)->update(["email3_sent" => 1]);
             // }
+            if($customer->send_email2!=null && $customer->send_email2<=$d && !$customer->email2_sent && $customer->email1_sent && !$customer->link_clicked){
+                Mail::to($customer->email)->send(new HelloEmail(2,$customer->id));
+                Customer::where('id',$customer->id)->update(["email2_sent" => 1]);
+            }
+            if($customer->send_email3 !=null && $customer->send_email3<=$d && !$customer->email3_sent && $customer->email2_sent && !$customer->link_clicked){
+                Mail::to($customer->email)->send(new HelloEmail(3,$customer->id));
+                Customer::where('id',$customer->id)->update(["email3_sent" => 1]);
+            }
             
         }
         

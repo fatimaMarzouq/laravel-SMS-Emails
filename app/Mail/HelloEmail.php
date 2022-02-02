@@ -42,6 +42,8 @@ public $customer_id;
         $appendedMsg=Str::replace("{link}", $link ,$email->Message);//search on {link} and replace it with the dynamic link
         return $this->subject($email->subject)->from("support@example.com")->view('email-template')->with([
             'Message' => $appendedMsg,
+            'Subject'=> $email->subject,
+            'Linked'=>$link
         ]);
     }
 }

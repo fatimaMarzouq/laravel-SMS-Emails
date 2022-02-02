@@ -18,18 +18,18 @@ class PredefinedEmailsController extends Controller
             $count=$sentEmails->count();
             $clickedInSms1=0;
             $clickedInEmail1=0;
-            $clickedInSms2=0;
             $clickedInEmail2=0;
+            $clickedInEmail3=0;
             // $sentEmails=emailCustomer::where('email_id',2)->get();            
             foreach($sentEmails as $sentEmail){
                 if($email->id==1 && $sentEmail->link_clicked){
                     $clickedInEmail1++;
                 }else if($email->id==2 && $sentEmail->link_clicked){
-                    $clickedInSms1++;
-                }else if($email->id==3 && $sentEmail->link_clicked){
                     $clickedInEmail2++;
+                }else if($email->id==3 && $sentEmail->link_clicked){
+                    $clickedInEmail3++;
                 }else if($email->id==4 && $sentEmail->link_clicked){
-                    $clickedInSms2++;
+                    $clickedInSms1++;
                 }
                 // $customer=Customer::findOrFail($sentEmail->customer_id);
                 
@@ -54,7 +54,7 @@ class PredefinedEmailsController extends Controller
             $email['clickedInEmail1']=$clickedInEmail1?($clickedInEmail1/$count)*100 : $clickedInEmail1;
             $email['clickedInSms1']=$clickedInSms1?($clickedInSms1/$count)*100: $clickedInSms1;
             $email['clickedInEmail2']=$clickedInEmail2?($clickedInEmail2/$count)*100: $clickedInEmail2;
-            $email['clickedInSms2']=$clickedInSms2?($clickedInSms2/$count)*100 : $clickedInSms2;
+            $email['clickedInEmail3']=$clickedInEmail3?($clickedInEmail3/$count)*100 : $clickedInEmail3;
             $email['count']=$count;
         }
         

@@ -80,7 +80,7 @@ class CustomerController extends Controller
         // return view('pages.deleteCustomer',compact('customer'));
         if(!$customer->sms1_sent && !$customer->link_clicked){
             $receiverNumber = $customer->phone;
-    $message = PredefinedEmails::findOrFail(2);
+    $message = PredefinedEmails::findOrFail(4);
 
     try {
 
@@ -90,7 +90,7 @@ class CustomerController extends Controller
 
         $client = new Client($account_sid, $auth_token);
         $uniqueID=emailCustomer::create([
-            "email_id" => 2,
+            "email_id" => 4,
             "customer_id" =>$customer->id,
         ]);
         $link=route('link-clicked',$uniqueID->id);
@@ -101,7 +101,7 @@ class CustomerController extends Controller
         Mail::to($customer->email)->send(new HelloEmail(1,$customer->id));
         $d =date('Y-m-d H:i:s');
         Customer::where('id',$customer->id)->update(['sms1_sent' => 1,'email1_sent'=>1,
-            'send_sms2'=>date('Y-m-d H:i:s', strtotime( $d . " +3 days")),
+            'send_email3'=>date('Y-m-d H:i:s', strtotime( $d . " +6 days")),
             'send_email2'=>date('Y-m-d H:i:s', strtotime( $d . " +3 days")),]);
         // dd('SMS Sent Successfully.'.$uniqueID);
         return redirect(route('customers-list'));
