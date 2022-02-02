@@ -12,4 +12,4 @@
     
     <img style="padding: 1rem;width: 200px;" src="{{ asset('/assets/images/reviewss.png') }}">
  <div style="padding: 1rem;color:#EA84EB;font-size: 14px;">
-    <a style="color:#EA84EB;font-size: 14px;" href='{{ $Linked }}'>Click here for a review</a> {{$Linked}}</div>
+    <a style="color:#EA84EB;font-size: 14px;" href='{{ url($Linked) }}'>Click here for a review</a> {{$Linked}}</div>
