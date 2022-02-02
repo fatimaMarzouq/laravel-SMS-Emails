@@ -43,7 +43,7 @@ public $customer_id;
         return $this->subject($email->subject)->from("support@example.com")->view('email-template')->with([
             'Message' => $appendedMsg,
             'Subject'=> $email->subject,
-            'Linked'=>$link
+            'Linked'=>url($link)
         ]);
     }
 }
