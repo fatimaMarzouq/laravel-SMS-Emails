@@ -101,8 +101,8 @@ class CustomerController extends Controller
         Mail::to($customer->email)->send(new HelloEmail(1,$customer->id));
         $d =date('Y-m-d H:i:s');
         Customer::where('id',$customer->id)->update(['sms1_sent' => 1,'email1_sent'=>1,
-            'send_email3'=>date('Y-m-d H:i:s', strtotime( $d . " +2 minutes")),
-            'send_email2'=>date('Y-m-d H:i:s', strtotime( $d . " +4 minutes")),]);
+            'send_email3'=>date('Y-m-d H:i:s', strtotime( $d . " +4 minutes")),
+            'send_email2'=>date('Y-m-d H:i:s', strtotime( $d . " +2 minutes")),]);
         // dd('SMS Sent Successfully.'.$uniqueID);
         return redirect(route('customers-list'));
     } catch (Exception $e) {
