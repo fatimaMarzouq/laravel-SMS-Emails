@@ -11,6 +11,7 @@ use Exception;
 use Twilio\Rest\Client;
 use App\Models\PredefinedEmails;
 use App\Models\emailCustomer;
+use App\Models\Url;
 use Illuminate\Support\Str;
 class CustomerController extends Controller
 {
@@ -89,9 +90,11 @@ class CustomerController extends Controller
         $twilio_number = getenv("TWILIO_FROM");
 
         $client = new Client($account_sid, $auth_token);
+       $url_id=Url::where('status',1)->pluck('id');
         $uniqueID=emailCustomer::create([
             "email_id" => 4,
             "customer_id" =>$customer->id,
+            "url_id" =>$url_id[0],
         ]);
         $link=route('link-clicked',$uniqueID->id);
         $appendedMsg=Str::replace("{link}", $link ,$message->Message);//search on {link} and replace it with the dynamic link

@@ -38,9 +38,9 @@ $customer=Customer::findOrFail($uniqueID->customer_id);
 $customer->link_clicked=1;
 $customer->save();
 // print_r($customer); 
-$url=Url::where('status',1)->pluck('url');
-if(!empty($url[0])) {
-return redirect($url[0]);} 
+$url=Url::findOrFail($uniqueID->url_id);
+if(!empty($url->url)) {
+return redirect($url->url);} 
 return redirect("error/404");
 })->name('link-clicked');
 

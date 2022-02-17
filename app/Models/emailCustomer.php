@@ -11,7 +11,7 @@ class emailCustomer extends Model
     use HasFactory;
     public $incrementing = false;
     protected $table="email_customer";
-    protected $fillable = ["id","email_id","customer_id"];
+    protected $fillable = ["id","email_id","customer_id","url_id"];
 
     public static function boot()
 {

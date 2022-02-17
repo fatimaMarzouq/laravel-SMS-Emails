@@ -34,16 +34,24 @@ public $customer_id;
     public function build()
     {
         $email= PredefinedEmails::findOrFail($this->email_id);
-        $uniqueID=emailCustomer::create([
+        $google=emailCustomer::create([
             "email_id" => $this->email_id,
             "customer_id" =>$this->customer_id,
+            "url_id" =>1,
         ]);
-        $link=route('link-clicked',$uniqueID->id);
+        $facebook=emailCustomer::create([
+            "email_id" => $this->email_id,
+            "customer_id" =>$this->customer_id,
+            "url_id" =>2,
+        ]);
+        $googleLink=route('link-clicked',$google->id);
+        $facebookLink=route('link-clicked',$facebook->id);
         // $appendedMsg=Str::replace("{link}", $link ,$email->Message);//search on {link} and replace it with the dynamic link
         return $this->subject($email->subject)->from("mail@laravillagedental.com","Lara Village Dental")->view('email-template')->with([
             'Message' => $email->Message,
             'Subject'=> $email->subject,
-            'Linked'=>$link
+            'googleLink'=>$googleLink,
+            'facebookLink'=>$facebookLink,
         ]);
     }
 }
